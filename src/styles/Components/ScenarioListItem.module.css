@@ -1,0 +1,10 @@
+.scenarioListItem {
+  border-block: solid var(--primary500) 1px;
+  padding-block: 1rem;
+  margin-block-end: 1rem;
+  max-width: 90%;
+}
+
+a {
+  text-decoration: none;
+}

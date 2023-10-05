@@ -1,0 +1,160 @@
+{
+  "scenarios": [
+    {
+      "title": "Chest Pain TEST",
+      "description": "This is a chest pain scenario",
+      "id": "1",
+      "initialVitals": {
+        "sbp": 120,
+        "dpb": 80,
+        "pulse": 80,
+        "co2": 40,
+        "co": 2,
+        "temp": 37,
+        "resp": 16,
+        "pulseOx": 95,
+        "ecg": {
+          "rhythm": "Sinus Rhythm",
+          "isStemi": false,
+          "isPEA": false,
+          "pWave": {
+            "duration": 0.08,
+            "amplitude": 0.25
+          },
+          "prInterval": {
+            "duration": 0.16
+          },
+          "qrsComplex": {
+            "duration": 0.08,
+            "amplitude": 1.2
+          },
+          "stSegment": {
+            "duration": 0.1,
+            "height": 0.2
+          },
+          "tWave": {
+            "duration": 0.16,
+            "amplitude": 0.3
+          }
+        },
+        "gcs": 15,
+        "pupils": {
+          "left": "3mm",
+          "right": "3mm",
+          "reactive": true
+        },
+        "skin": {
+          "color": "pink",
+          "temperature": "warm",
+          "condition": "dry"
+        }
+      },
+      "demographics": {
+        "name": "John Smith",
+        "gender": "Male",
+        "age": 40,
+        "weight": 80,
+        "height": 175,
+        "history": ["Hypertension", "CAD"],
+        "meds": ["Lisinopril", "Simvastatin", "Aspirin"],
+        "allergies": ["Penicillin"],
+        "complaint": "My chest feels like it is going to explode",
+        "primaryLanguage": "English",
+        "startLocation": "Sitting in a chair"
+      },
+      "hospitals": [
+        {
+          "name": "Roanoke Memorial",
+          "eta": 45,
+          "abilities": [
+            "Level I Trauma",
+            "Coronary Cath",
+            "Neuro",
+            "Pulmonology"
+          ],
+          "icuAvailability": true,
+          "specialties": ["Orthopedics", "Cardiology"]
+        },
+        {
+          "name": "Agony Regional",
+          "eta": 10,
+          "abilities": ["Critical Access", "Thrombolytics", "General Surgery"],
+          "icuAvailability": false,
+          "specialties": ["General Surgery"]
+        }
+      ],
+      "scene": {
+        "timeHour": 9,
+        "timeMinutes": 30,
+        "structure": "Single Family Home",
+        "weatherConditions": "Clear",
+        "accessibility": "Easy",
+        "bystanders": {
+          "count": 2,
+          "roles": ["Can assist", "Obstructive"]
+        },
+        "hazards": [],
+        "description": "Well kept home, in a nice neighborhood, etc..."
+      },
+      "equipment": {
+        "autoBp": false,
+        "pulseOx": false,
+        "ett": {
+          "isPlaced": false,
+          "size": null,
+          "depth": null
+        },
+        "sga": {
+          "isPlaced": false,
+          "size": null,
+          "depth": null
+        },
+        "electrodes": {
+          "isPlaced": false,
+          "type": "leftTwelve"
+        },
+        "defib": {
+          "isPlaced": false,
+          "type": "AED",
+          "shockAdvised": false
+        },
+        "medications": {
+          "epinephrine": "2mg",
+          "nitroglycerin": "0.4mg"
+        },
+        "ivAccess": {
+          "isEstablished": false,
+          "location": null,
+          "gauge": null
+        },
+        "fluids": {
+          "normalSaline": "500ml",
+          "ringerLactate": "500ml"
+        },
+        "suction": {
+          "isAvailable": true,
+          "isFunctional": true
+        },
+        "oxygen": {
+          "type": "tank",
+          "amount": "2000L",
+          "flowRate": "15L/min"
+        }
+      },
+      "progression": [
+        {
+          "time": "5 mins",
+          "event": "Patient becomes unconscious",
+          "vitalsChange": {
+            "sbp": 100,
+            "pulse": 60,
+            "gcs": 8
+          }
+        }
+      ],
+      "decisions": [],
+      "outcomes": [],
+      "references": []
+    }
+  ]
+}

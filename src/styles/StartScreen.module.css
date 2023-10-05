@@ -1,0 +1,19 @@
+.startMenuList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 1rem;
+  list-style: none;
+}
+.logo {
+  max-width: 33%;
+}
+.version {
+  color: var(--primary500);
+  font-weight: bold;
+}
+
+.logoText {
+  color: var(--primary500);
+  text-transform: uppercase;
+}

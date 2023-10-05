@@ -1,0 +1,11 @@
+scenarioSelectList {
+}
+
+.scenarioList {
+  list-style: none;
+  width: 500px;
+  max-height: 500px;
+
+  overflow: auto;
+  padding-left: 1rem;
+}
