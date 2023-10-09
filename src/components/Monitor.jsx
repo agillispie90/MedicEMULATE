@@ -10,15 +10,17 @@ export default function ECGMonitor({
   const circleRef = useRef(null);
   const [totalLength, setTotalLength] = useState(0);
 
+  const getRandomFactor = (range) => Math.random() * range - range / 2;
+
   useEffect(() => {
     let d = "M 0,0 ";
-    const { pWave, prInterval, qrsComplex, stSegment, tWave } = ecgParameters;
     let currentX = 0;
     const scaleFactorX = svgWidth / 150;
     const scaleFactorY = svgHeight / 40;
 
     const drawBeat = () => {
       let segment = "";
+      let { pWave, prInterval, qrsComplex, stSegment, tWave } = ecgParameters;
 
       // P wave
       segment += `q ${((pWave.duration / 0.04) * scaleFactorX) / 2},${
@@ -38,27 +40,30 @@ export default function ECGMonitor({
       } `;
       currentX += (qrsComplex.duration / 0.04) * scaleFactorX;
 
-      segment += `l ${((stSegment.duration / 0.1) * scaleFactorX) / 2},${
-        (-stSegment.height / 0.1) * scaleFactorY
-      } h ${(stSegment.duration / 0.2) * scaleFactorX} `;
-      currentX += (stSegment.duration / 0.04) * scaleFactorX;
+      // Simulate J-point with a small curve
+      let jPointCurve = 5; // Adjust as needed for the curve tightness
+      let stSegmentHeight = (stSegment.height / 0.1) * scaleFactorY;
+      segment += `q ${jPointCurve},${stSegmentHeight / 2} ${
+        jPointCurve * 2
+      },${stSegmentHeight} `;
 
-      // ST segment (new)
-      segment += `l ${((stSegment.duration / 0.1) * scaleFactorX) / 2},${
-        (-stSegment.height / 0.1) * scaleFactorY
-      } h ${(stSegment.duration / 0.2) * scaleFactorX} `;
-      currentX += (stSegment.duration / 0.04) * scaleFactorX;
+      // ST segment (STEMI emulation with elevation)
+      let stSegmentWidth = (stSegment.duration / 0.04) * scaleFactorX;
+      segment += `h ${stSegmentWidth - jPointCurve * 2} `;
+      currentX += stSegmentWidth;
 
-      // T wave (new)
+      // T wave starts from the elevated position and then returns to baseline
       segment += `q ${((tWave.duration / 0.04) * scaleFactorX) / 2},${
         (-tWave.amplitude / 0.1) * scaleFactorY
-      } ${(tWave.duration / 0.04) * scaleFactorX},${
-        (stSegment.height / 0.1) * scaleFactorY
-      } `;
+      } ${(tWave.duration / 0.04) * scaleFactorX},0 `;
       currentX += (tWave.duration / 0.04) * scaleFactorX;
 
-      // Bring the line back to baseline
-      segment += `l 0,${(stSegment.height / 0.1) * scaleFactorY} `;
+      let artifact = Math.random();
+      if (artifact < 0.5) {
+        artifact *= -1;
+      }
+      // Return to baseline
+      segment += `l 0,${-stSegmentHeight} `;
 
       // Complete the RR interval
       let rrIntervalMM = 1500 / Math.max(pulseRate, 1);
@@ -68,9 +73,9 @@ export default function ECGMonitor({
 
       return segment;
     };
+
     for (let i = 0; i < Math.floor((pulseRate * 6) / 60); i++) {
       d += drawBeat();
-      currentX = 0; // Reset for next beat
     }
 
     if (pathRef.current) {
@@ -101,18 +106,28 @@ export default function ECGMonitor({
   }, [pulseRate, totalLength]);
 
   return (
-    <svg width={svgWidth} height={svgHeight}>
+    <svg
+      style={{
+        display: "flex",
+        placeItems: "center",
+        paddingLeft: "3rem",
+        overflow: "hidden",
+        maxWidth: "100%",
+      }}
+      width={svgWidth}
+      height={svgHeight}
+    >
       <path
         ref={pathRef}
-        stroke="black"
-        strokeWidth="1"
+        stroke="limegreen"
+        strokeWidth="2"
         fill="none"
         transform={`translate(0, ${svgHeight / 2})`}
       />
       <circle
         ref={circleRef}
         r="4"
-        fill="green"
+        fill="black"
         transform={`translate(0, ${svgHeight / 2})`}
       />
     </svg>

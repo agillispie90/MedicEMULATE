@@ -16,11 +16,11 @@
 }
 
 body {
-  background-color: var(--accent100);
-  max-width: 1900px;
+  background-color: var(--background);
+  height: 99vh;
+  max-width: 1800px;
   max-height: 900px;
   margin: auto;
-  height: 99vh;
 }
 
 li a {

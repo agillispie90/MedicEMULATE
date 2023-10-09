@@ -6,7 +6,7 @@
       "id": "1",
       "initialVitals": {
         "sbp": 120,
-        "dpb": 80,
+        "dbp": 80,
         "pulse": 80,
         "co2": 40,
         "co": 2,
@@ -52,8 +52,8 @@
       "demographics": {
         "name": "John Smith",
         "gender": "Male",
-        "age": 40,
-        "weight": 80,
+        "age": { "value": 40, "descriptor": "years old" },
+        "weight": { "value": 45, "descriptor": "kg" },
         "height": 175,
         "history": ["Hypertension", "CAD"],
         "meds": ["Lisinopril", "Simvastatin", "Aspirin"],
@@ -87,7 +87,7 @@
         "timeHour": 9,
         "timeMinutes": 30,
         "structure": "Single Family Home",
-        "weatherConditions": "Clear",
+        "weather": "Clear",
         "accessibility": "Easy",
         "bystanders": {
           "count": 2,
